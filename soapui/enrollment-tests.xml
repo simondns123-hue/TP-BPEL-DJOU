@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="6e5b8d3e-e021-4bfd-8563-89275eb8dffa" activeEnvironment="Default" name="enrollment-tests" resourceRoot="" soapui-version="5.7.2" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="71e4522c-77df-4c6a-a432-ac7abd9ed796" wsaVersion="NONE" name="EnrollmentSOAP" type="wsdl" bindingName="{http://tp.bpel/enrollment/}EnrollmentSOAP" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/ode/processes/EnrollmentService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/ode/processes/EnrollmentService?wsdl"><con:part><con:url>http://localhost:8080/ode/processes/EnrollmentService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://tp.bpel/enrollment/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://tp.bpel/enrollment/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl">
+  <wsdl:types>
+    <xsd:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://tp.bpel/enrollment/">
+      <xsd:element name="enrollRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="student">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="name" type="xsd:string"/>
+                  <xsd:element name="program" type="xsd:string"/>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="amount" type="xsd:decimal"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="enrollResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="status" type="xsd:string"/>
+            <xsd:element name="studentId" type="xsd:string"/>
+            <xsd:element name="receipt" type="xsd:string"/>
+            <xsd:element name="roomNumber" type="xsd:string"/>
+            <xsd:element name="passId" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="enrollIn">
+    <wsdl:part name="payload" element="tns:enrollRequest"/>
+  </wsdl:message>
+  <wsdl:message name="enrollOut">
+    <wsdl:part name="payload" element="tns:enrollResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="EnrollmentServicePortType">
+    <wsdl:operation name="enroll">
+      <wsdl:input message="tns:enrollIn" wsaw:Action="enroll"/>
+      <wsdl:output message="tns:enrollOut" wsaw:Action="http://tp.bpel/enrollment/EnrollmentPT/enrollResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="EnrollmentSOAP" type="tns:EnrollmentServicePortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="enroll">
+      <soap:operation soapAction="enroll" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EnrollmentService">
+    <wsdl:port name="EnrollmentPort" binding="tns:EnrollmentSOAP">
+      <soap:address location="http://localhost:8080/ode/processes/EnrollmentService.EnrollmentPort/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/ode/processes/EnrollmentService.EnrollmentPort/</con:endpoint></con:endpoints><con:operation id="eec30e14-bc8c-4b49-b594-64a3ee94aa05" isOneWay="false" action="enroll" name="TC1_Nominal_350000" bindingOperationName="enroll" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c4b16261-6156-4a51-b781-0cfe66076b79" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ode/processes/EnrollmentService.EnrollmentPort/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:enr="http://tp.bpel/enrollment/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <enr:enrollRequest>
+         <student>
+            <name>Alice</name>
+            <program>ISI4</program>
+         </student>
+         <amount>350000</amount>
+      </enr:enrollRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="enroll"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite id="9d189951-f9f0-45b1-a758-844164df3c51" name="EnrollmentSOAP TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="b8bd7124-1058-497c-bdf8-5626961dcdb3" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TC1_Nominal_350000 TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="0c989ddf-1359-4f93-9639-42f1fe22adec" name="TC1_Nominal_350000"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>EnrollmentSOAP</con:interface><con:operation>TC1_Nominal_350000</con:operation><con:request name="TC1_Nominal_350000" id="905d9e5b-0600-4e3c-a567-a5eb9df0c8e8"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ode/processes/EnrollmentService.EnrollmentPort/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:enr="http://tp.bpel/enrollment/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <enr:enrollRequest>
+         <student>
+            <name>Alice</name>
+            <program>ISI4</program>
+         </student>
+         <amount>350000</amount>
+      </enr:enrollRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="Simple Contains" id="842b9b95-b05e-4061-904a-626790bb1972" name="Contains"><con:configuration><token>ENROLLED</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="SOAP Fault Assertion" id="d00df133-9581-4fe9-8d78-1deb0b00f326" name="Not SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="enroll" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="cb5e835c-4d38-4000-a2c6-b020c29de607" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TC2_Refused_900000" searchProperties="true"><con:settings/><con:testStep type="request" id="bcb42b89-6196-479b-a457-dee1bc6f2e3f" name="TC2_Refused_900000"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>EnrollmentSOAP</con:interface><con:operation>TC1_Nominal_350000</con:operation><con:request name="TC2_Refused_900000" id="905d9e5b-0600-4e3c-a567-a5eb9df0c8e8"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ode/processes/EnrollmentService.EnrollmentPort/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:enr="http://tp.bpel/enrollment/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <enr:enrollRequest>
+         <student>
+            <name>Alice</name>
+            <program>ISI4</program>
+         </student>
+         <amount>900000</amount>
+      </enr:enrollRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Fault Assertion" id="d00df133-9581-4fe9-8d78-1deb0b00f326" name="Not SOAP Fault"/><con:assertion type="Simple Contains" id="d575b2b0-3232-4ecd-84b4-05b0e96b81b4" name="Contains"><con:configuration><token>REFUSED</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="enroll" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="701fbc60-661f-44e6-97e9-3c3b5b4366bc" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TC3_Limit_500000" searchProperties="true"><con:settings/><con:testStep type="request" id="5967ca92-af26-4301-abcd-927ab2a15b1f" name="TC3_Limit_500000"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>EnrollmentSOAP</con:interface><con:operation>TC1_Nominal_350000</con:operation><con:request name="TC3_Limit_500000" id="905d9e5b-0600-4e3c-a567-a5eb9df0c8e8"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ode/processes/EnrollmentService.EnrollmentPort/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:enr="http://tp.bpel/enrollment/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <enr:enrollRequest>
+         <student>
+            <name>Alice</name>
+            <program>ISI4</program>
+         </student>
+         <amount>500000</amount>
+      </enr:enrollRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Fault Assertion" id="d00df133-9581-4fe9-8d78-1deb0b00f326" name="Not SOAP Fault"/><con:assertion type="Simple Contains" id="c8bb6d63-22d9-4c26-8c24-a46d8e111164" name="Contains"><con:configuration><token>ENROLLED</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="enroll" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="5c425a7a-9e13-4437-bc34-c233cd38e2f0" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TC4_Limit_500001" searchProperties="true"><con:settings/><con:testStep type="request" id="d2918c60-3180-4a9a-9154-7a765288f9a1" name="TC4_Limit_500001"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>EnrollmentSOAP</con:interface><con:operation>TC1_Nominal_350000</con:operation><con:request name="TC4_Limit_500001" id="905d9e5b-0600-4e3c-a567-a5eb9df0c8e8"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ode/processes/EnrollmentService.EnrollmentPort/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:enr="http://tp.bpel/enrollment/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <enr:enrollRequest>
+         <student>
+            <name>Alice</name>
+            <program>ISI4</program>
+         </student>
+         <amount>500001</amount>
+      </enr:enrollRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Fault Assertion" id="d00df133-9581-4fe9-8d78-1deb0b00f326" name="Not SOAP Fault"/><con:assertion type="Simple Contains" id="d575b2b0-3232-4ecd-84b4-05b0e96b81b4" name="Contains"><con:configuration><token>REFUSED</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="enroll" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
