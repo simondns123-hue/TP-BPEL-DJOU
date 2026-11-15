@@ -23,9 +23,11 @@ tp-bpel-enrollment/
 │   ├── residence-event-adapter/
 │   ├── transport-event-adapter/
 │   └── enrollment-client/          publishes EnrollmentRequested, prints EnrollmentCompleted
-└── soapui/
-    ├── enrollment-tests.xml        SoapUI project (4 test cases)
-    └── Screenshots/
+├── soapui/
+│   └── enrollment-tests.xml        SoapUI project (4 test cases)
+└── report/
+    ├── TP-BPEL_DJOU_Simon.pdf      lab report
+    └── Screenshots/                screenshots of the runs (Parts A and B)
 ```
 
 ## Prerequisites
